@@ -18,7 +18,7 @@
         </section>
 
         <section class="menu">
-            <button class="btn-menu" data-tipo="salud">
+            <button class="btn-menu" data-tipo="salud" id="btn-seguros-salud">
                 <i class="fas fa-user-md"></i>
                 <span>Seguros Salud</span>
             </button>
@@ -54,5 +54,8 @@
     <footer>
         <p>&copy; 2025 Hospital Quirónsalud Toledo</p>
     </footer>
+
+    <script src="menu.js"></script>
+    
 </body>
 </html>
