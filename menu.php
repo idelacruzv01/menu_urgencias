@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Menú Protocolos</title>
-    <link rel="stylesheet" href="estilo_menu.css">
+    <link rel="stylesheet" href="css/estilo_menu.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -55,7 +55,7 @@
         <p>&copy; 2025 Hospital Quirónsalud Toledo</p>
     </footer>
 
-    <script src="menu.js"></script>
-    
+    <script src="js/menu.js"></script>
+
 </body>
 </html>
