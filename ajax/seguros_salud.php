@@ -15,7 +15,7 @@ try {
                 $logo = htmlspecialchars($fila['logo']);
                 $rutaLogo = "img/logos/" . $logo;
 
-                echo "<div class='aseguradora'>";
+                echo "<div class='aseguradora' data-nombre=\"$nombre\" data-logo=\"$logo\">";
                 echo "<img src='$rutaLogo' alt='Logo $nombre' class='logo'>";
                 echo "<span>$nombre</span>";
                 echo "</div>";
