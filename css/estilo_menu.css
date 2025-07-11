@@ -233,3 +233,24 @@ footer {
     color: #333;
 }
 
+/*Formato para resultado de los protocolos de urgencias*/
+
+.bloque-protocolo {
+    background-color: #f2f7f8;
+    border: 1px solid #d2e3e5;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 2rem;
+    max-width: 700px;
+    margin-inline: auto;
+}
+
+.bloque-protocolo h3 {
+    color: #006778;
+    margin-bottom: 1rem;
+}
+
+.bloque-protocolo h4 {
+    margin-top: 1rem;
+    color: #333;
+}

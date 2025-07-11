@@ -1,4 +1,3 @@
-
 document.getElementById('btn-seguros-salud').addEventListener('click', function () {
     fetch('ajax/seguros_salud.php')
         .then(response => response.text())
@@ -15,12 +14,13 @@ function activarClicksEnAseguradoras() {
         item.addEventListener('click', () => {
             const nombre = item.dataset.nombre;
             const logo = item.dataset.logo;
-            mostrarOpciones(nombre, logo);
+            const id = item.dataset.id;
+            mostrarOpciones(nombre, logo, id);
         });
     });
 }
 
-function mostrarOpciones(nombre, logo) {
+function mostrarOpciones(nombre, logo, id) {
     const opciones = [
         { texto: "Contacto", icono: "fas fa-phone" },
         { texto: "Urgencias", icono: "fas fa-ambulance" },
@@ -42,7 +42,7 @@ function mostrarOpciones(nombre, logo) {
 
     opciones.forEach(opcion => {
         html += `
-            <button class="btn-opcion" data-opcion="${opcion.texto}" data-aseguradora="${nombre}">
+            <button class="btn-opcion" data-opcion="${opcion.texto}" data-id="${id}">
                 <i class="${opcion.icono}"></i>
                 <span>${opcion.texto}</span>
             </button>
@@ -51,36 +51,54 @@ function mostrarOpciones(nombre, logo) {
 
     html += `</div>`;
     document.getElementById('resultado').innerHTML = html;
-
-    document.addEventListener('click', function (e) {
-        if (e.target.classList.contains('btn-opcion')) {
-            const opcion = e.target.dataset.opcion;
-            const aseguradora = e.target.dataset.aseguradora;
-
-            if (opcion === "Contacto") {
-                mostrarContacto(aseguradora);
-            }
-            // Aquí podrías poner otros ifs para "Urgencias", etc.
-        }
-    });
-
-    function mostrarContacto(nombre) {
-        fetch(`ajax/contacto.php?nombre=${encodeURIComponent(nombre)}`)
-            .then(response => response.text())
-            .then(data => {
-                // Inserta debajo del bloque de opciones, sin reemplazarlo
-                const contenedorOpciones = document.querySelector('.opciones');
-                let bloqueExistente = document.querySelector('.bloque-contacto');
-
-                if (bloqueExistente) {
-                    bloqueExistente.remove(); // Evita duplicados
-                }
-
-                contenedorOpciones.insertAdjacentHTML('afterend', data);
-            })
-            .catch(error => console.error('Error al cargar contacto:', error));
-    }
-
-
 }
+
+
+document.addEventListener('click', function (e) {
+    if (e.target.classList.contains('btn-opcion')) {
+        const opcion = e.target.dataset.opcion;
+        const id = e.target.dataset.id; // ✅ ya no necesitas buscarlo
+
+        if (opcion === "Contacto") {
+            mostrarContacto(id);
+        }
+
+        if (opcion === "Urgencias") {
+            mostrarUrgencias(id);
+        }
+    }
+});
+
+
+function mostrarContacto(id) {
+    limpiarBloquesDinamicos();
+    fetch(`ajax/contacto.php?id=${id}`)
+        .then(response => response.text())
+        .then(data => {
+            const contenedorOpciones = document.querySelector('.opciones');
+            let bloqueExistente = document.querySelector('.bloque-contacto');
+            if (bloqueExistente) bloqueExistente.remove();
+            contenedorOpciones.insertAdjacentHTML('afterend', data);
+        })
+        .catch(error => console.error('Error al cargar contacto:', error));
+}
+
+function mostrarUrgencias(id) {
+    limpiarBloquesDinamicos();
+    fetch(`ajax/protocolo_urgencias.php?id=${id}`)
+        .then(response => response.text())
+        .then(data => {
+            const bloqueExistente = document.querySelector('.bloque-protocolo');
+            if (bloqueExistente) bloqueExistente.remove();
+            const contenedor = document.querySelector('.opciones');
+            contenedor.insertAdjacentHTML('afterend', data);
+        })
+        .catch(error => console.error('Error al cargar protocolo de urgencias:', error));
+}
+
+function limpiarBloquesDinamicos() {
+    const bloques = document.querySelectorAll('.bloque-contacto, .bloque-protocolo, .bloque-antigenos, .bloque-tac, .bloque-traslado, .bloque-incidencias');
+    bloques.forEach(b => b.remove());
+}
+
 

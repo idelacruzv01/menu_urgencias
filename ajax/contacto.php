@@ -1,19 +1,19 @@
 <?php
 require_once '../core/Database.php';
 
-if (!isset($_GET['nombre'])) {
-    echo "Error: nombre de aseguradora no proporcionado.";
+if (!isset($_GET['id'])) {
+    echo "Error: ID de aseguradora no proporcionado.";
     exit;
 }
 
-$nombre = $_GET['nombre'];
+$id = (int) $_GET['id'];
 
 try {
     $db = new Database();
     $conn = $db->getConnection();
 
-    $stmt = $conn->prepare("SELECT telefono, horario, mail1, mail2 FROM seguros_salud WHERE nombre = :nombre");
-    $stmt->bindParam(':nombre', $nombre);
+    $stmt = $conn->prepare("SELECT telefono, horario, mail1, mail2 FROM seguros_salud WHERE id = :id");
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
     $datos = $stmt->fetch(PDO::FETCH_ASSOC);
 

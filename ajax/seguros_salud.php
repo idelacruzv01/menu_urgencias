@@ -5,17 +5,18 @@ try {
     $db = new Database();
     $conn = $db->getConnection();
 
-    $stmt = $conn->query("SELECT nombre, logo FROM seguros_salud ORDER BY nombre ASC");
+    $stmt = $conn->query("SELECT id, nombre, logo FROM seguros_salud ORDER BY nombre ASC");
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if ($resultados) {
         echo "<div class='grid-aseguradoras'>";
             foreach ($resultados as $fila) {
+                $id = $fila['id'];
                 $nombre = htmlspecialchars($fila['nombre']);
                 $logo = htmlspecialchars($fila['logo']);
                 $rutaLogo = "img/logos/" . $logo;
 
-                echo "<div class='aseguradora' data-nombre=\"$nombre\" data-logo=\"$logo\">";
+                echo "<div class='aseguradora' data-nombre=\"$nombre\" data-logo=\"$logo\" data-id=\"$id\">";
                 echo "<img src='$rutaLogo' alt='Logo $nombre' class='logo'>";
                 echo "<span>$nombre</span>";
                 echo "</div>";
