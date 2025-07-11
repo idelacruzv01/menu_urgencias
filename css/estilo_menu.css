@@ -133,6 +133,7 @@ footer {
 
 .aseguradora:hover {
     transform: scale(1.03);
+    cursor: pointer;
 }
 
 .aseguradora img.logo {
@@ -206,6 +207,29 @@ footer {
 
 .cabecera-aseguradora h2 span {
     font-weight: bold;
+    color: #333;
+}
+
+/*Estilo para la opción contacto*/
+
+.bloque-contacto {
+    background-color: #f8f9fa;
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 2rem;
+    max-width: 600px;
+    margin-inline: auto;
+}
+
+.bloque-contacto h3 {
+    color: #006778;
+    margin-bottom: 1rem;
+}
+
+.bloque-contacto p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
     color: #333;
 }
 

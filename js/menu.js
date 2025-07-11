@@ -52,13 +52,35 @@ function mostrarOpciones(nombre, logo) {
     html += `</div>`;
     document.getElementById('resultado').innerHTML = html;
 
-    // Aquí puedes agregar eventos a los botones si quieres dar funcionalidad luego
+    document.addEventListener('click', function (e) {
+        if (e.target.classList.contains('btn-opcion')) {
+            const opcion = e.target.dataset.opcion;
+            const aseguradora = e.target.dataset.aseguradora;
+
+            if (opcion === "Contacto") {
+                mostrarContacto(aseguradora);
+            }
+            // Aquí podrías poner otros ifs para "Urgencias", etc.
+        }
+    });
+
+    function mostrarContacto(nombre) {
+        fetch(`ajax/contacto.php?nombre=${encodeURIComponent(nombre)}`)
+            .then(response => response.text())
+            .then(data => {
+                // Inserta debajo del bloque de opciones, sin reemplazarlo
+                const contenedorOpciones = document.querySelector('.opciones');
+                let bloqueExistente = document.querySelector('.bloque-contacto');
+
+                if (bloqueExistente) {
+                    bloqueExistente.remove(); // Evita duplicados
+                }
+
+                contenedorOpciones.insertAdjacentHTML('afterend', data);
+            })
+            .catch(error => console.error('Error al cargar contacto:', error));
+    }
+
+
 }
 
-// ACTUALIZA el fetch original para llamar a la función después de insertar datos:
-fetch('ajax/seguros_salud.php')
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('resultado').innerHTML = data;
-        activarClicksEnAseguradoras(); // Aquí
-    });
