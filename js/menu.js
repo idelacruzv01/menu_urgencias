@@ -74,6 +74,10 @@ document.addEventListener('click', function (e) {
         if (opcion === "TAC") {
             mostrarTacs(id);
         }
+
+        if (opcion === "Autorización de Ingreso") {
+            mostrarIngresos(id);
+        }
     }
 });
 
@@ -105,7 +109,7 @@ function mostrarUrgencias(id) {
 }
 
 function limpiarBloquesDinamicos() {
-    const bloques = document.querySelectorAll('.bloque-contacto, .bloque-protocolo, .bloque-antigeno, .bloque-tac, .bloque-traslado, .bloque-incidencias');
+    const bloques = document.querySelectorAll('.bloque-contacto, .bloque-protocolo, .bloque-antigeno, .bloque-tac, .bloque-ingresos, .bloque-traslado, .bloque-incidencias');
     bloques.forEach(b => b.remove());
 }
 
@@ -133,4 +137,17 @@ function mostrarTacs(id) {
         contenedor.insertAdjacentHTML('afterend', data);
     })
     .catch(error => console.error('Error al cargar los datos de autorizaciones de TACs:', error))
+}
+
+function mostrarIngresos(id) {
+    limpiarBloquesDinamicos();
+    fetch(`ajax/ingreso.php?id=${id}`)
+    .then(response => response.text())
+    .then(data => {
+        const bloqueExistente = document.querySelector('.bloque-ingresos');
+        if(bloqueExistente) bloqueExistente.remove();
+        const contenedor = document.querySelector('.opciones');
+        contenedor.insertAdjacentHTML('afterend', data);
+    })
+    .catch(error => console.error('Error al cargar los datos de autorizaciones de Ingresos:', error))
 }
