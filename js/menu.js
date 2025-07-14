@@ -70,6 +70,10 @@ document.addEventListener('click', function (e) {
         if (opcion === "Antígenos") {
             mostrarAntigenos(id);
         }
+
+        if (opcion === "TAC") {
+            mostrarTacs(id);
+        }
     }
 });
 
@@ -101,7 +105,7 @@ function mostrarUrgencias(id) {
 }
 
 function limpiarBloquesDinamicos() {
-    const bloques = document.querySelectorAll('.bloque-contacto, .bloque-protocolo, .bloque-antigenos, .bloque-tac, .bloque-traslado, .bloque-incidencias');
+    const bloques = document.querySelectorAll('.bloque-contacto, .bloque-protocolo, .bloque-antigeno, .bloque-tac, .bloque-traslado, .bloque-incidencias');
     bloques.forEach(b => b.remove());
 }
 
@@ -116,4 +120,17 @@ function mostrarAntigenos(id) {
         contenedor.insertAdjacentHTML('afterend', data);
     })
     .catch(error => console.error('Error al cargar los datos de antígenos:', error))
+}
+
+function mostrarTacs(id) {
+    limpiarBloquesDinamicos();
+    fetch(`ajax/tac.php?id=${id}`)
+    .then(response => response.text())
+    .then(data => {
+        const bloqueExistente = document.querySelector('.bloque-tac');
+        if(bloqueExistente) bloqueExistente.remove();
+        const contenedor = document.querySelector('.opciones');
+        contenedor.insertAdjacentHTML('afterend', data);
+    })
+    .catch(error => console.error('Error al cargar los datos de autorizaciones de TACs:', error))
 }
