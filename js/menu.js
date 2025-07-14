@@ -66,6 +66,10 @@ document.addEventListener('click', function (e) {
         if (opcion === "Urgencias") {
             mostrarUrgencias(id);
         }
+
+        if (opcion === "Antígenos") {
+            mostrarAntigenos(id);
+        }
     }
 });
 
@@ -101,4 +105,15 @@ function limpiarBloquesDinamicos() {
     bloques.forEach(b => b.remove());
 }
 
-
+function mostrarAntigenos(id) {
+    limpiarBloquesDinamicos();
+    fetch(`ajax/antigeno.php?id=${id}`)
+    .then(response => response.text())
+    .then(data => {
+        const bloqueExistente = document.querySelector('.bloque-antigeno');
+        if(bloqueExistente) bloqueExistente.remove();
+        const contenedor = document.querySelector('.opciones');
+        contenedor.insertAdjacentHTML('afterend', data);
+    })
+    .catch(error => console.error('Error al cargar los datos de antígenos:', error))
+}
