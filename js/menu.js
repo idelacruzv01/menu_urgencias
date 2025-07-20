@@ -82,6 +82,10 @@ document.addEventListener('click', function (e) {
         if (opcion === "Traslado a otro centro") {
             mostrarTrasladosOtrosCentros(id);
         }
+
+        if (opcion === "Traslado a domicilio") {
+            mostrarTrasladosDomicilio(id);
+        }
     }
 });
 
@@ -113,7 +117,7 @@ function mostrarUrgencias(id) {
 }
 
 function limpiarBloquesDinamicos() {
-    const bloques = document.querySelectorAll('.bloque-contacto, .bloque-protocolo, .bloque-antigeno, .bloque-tac, .bloque-ingresos, .bloque-traslado, .bloque-incidencias');
+    const bloques = document.querySelectorAll('.bloque-contacto, .bloque-protocolo, .bloque-antigeno, .bloque-tac, .bloque-ingresos, .bloque_traslado_hospitalario, .bloque_traslado_domicilio, .bloque-incidencias');
     bloques.forEach(b => b.remove());
 }
 
@@ -167,4 +171,17 @@ function mostrarTrasladosOtrosCentros(id) {
         contenedor.insertAdjacentHTML('afterend', data);
     })
     .catch(error => console.error('Error al cargar los datos de traslados a otros centros:', error))
+}
+
+function mostrarTrasladosDomicilio(id) {
+    limpiarBloquesDinamicos();
+    fetch(`ajax/traslado_domicilio.php?id=${id}`)
+    .then(response => response.text())
+    .then(data => {
+        const bloqueExistente = document.querySelector('.bloque_traslado_domicilio');
+        if(bloqueExistente) bloqueExistente.remove();
+        const contenedor = document.querySelector('.opciones');
+        contenedor.insertAdjacentHTML('afterend', data);
+    })
+    .catch(error => console.error('Error al cargar los datos de traslados a domicilio:', error))
 }
