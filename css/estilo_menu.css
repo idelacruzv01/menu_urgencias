@@ -279,7 +279,7 @@ footer {
 
 /*Formato para resultado de los TACs de urgencias*/
 
-.bloque-tac, .bloque-ingresos {
+.bloque-tac, .bloque-ingresos, .bloque_traslado_hospitalario {
     background-color: #f2f7f8;
     border: 1px solid #d2e3e5;
     border-radius: 8px;
@@ -289,12 +289,12 @@ footer {
     margin-inline: auto;
 }
 
-.bloque-tac h3, .bloque-ingresos h3 {
+.bloque-tac h3, .bloque-ingresos h3, .bloque_traslado_hospitalario h3 {
     color: #006778;
     margin-bottom: 1rem;
 }
 
-.bloque-tac h4, .bloque-ingresos h4 {
+.bloque-tac h4, .bloque-ingresos h4, .bloque_traslado_hospitalario h4 {
     margin-top: 1rem;
     color: #333;
 }

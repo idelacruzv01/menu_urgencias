@@ -78,6 +78,10 @@ document.addEventListener('click', function (e) {
         if (opcion === "Autorización de Ingreso") {
             mostrarIngresos(id);
         }
+
+        if (opcion === "Traslado a otro centro") {
+            mostrarTrasladosOtrosCentros(id);
+        }
     }
 });
 
@@ -150,4 +154,17 @@ function mostrarIngresos(id) {
         contenedor.insertAdjacentHTML('afterend', data);
     })
     .catch(error => console.error('Error al cargar los datos de autorizaciones de Ingresos:', error))
+}
+
+function mostrarTrasladosOtrosCentros(id) {
+    limpiarBloquesDinamicos();
+    fetch(`ajax/traslado_hospitalario.php?id=${id}`)
+    .then(response => response.text())
+    .then(data => {
+        const bloqueExistente = document.querySelector('.bloque_traslado_hospitalario');
+        if(bloqueExistente) bloqueExistente.remove();
+        const contenedor = document.querySelector('.opciones');
+        contenedor.insertAdjacentHTML('afterend', data);
+    })
+    .catch(error => console.error('Error al cargar los datos de traslados a otros centros:', error))
 }
