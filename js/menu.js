@@ -22,6 +22,18 @@ document.getElementById('btn-seguros-deportes').addEventListener('click', functi
         .catch(error => console.error('Error en la petición:', error));
 });
 
+/*Evento para el botón de mutuas laborales*/
+document.getElementById('btn-mutuas-laborales').addEventListener('click', function () {
+    limpiarBloquesAseguradoras();
+    fetch('ajax/mutuas_laborales.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('resultado').innerHTML = data;
+            activarClicksEnAseguradoras();
+        })
+        .catch(error => console.error('Error en la petición:', error));
+});
+
 /*Función para limpiar los bloques de grid con el resultado de las aseguradoras de cada tipo*/
 function limpiarBloquesAseguradoras() {
     document.getElementById('resultado').innerHTML = '';

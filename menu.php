@@ -26,7 +26,7 @@
                 <i class="fas fa-running"></i>
                 <span>Seguros Deportivos y Accidentes</span>
             </button>
-            <button class="btn-menu" data-tipo="mutuas">
+            <button class="btn-menu" data-tipo="mutuas" id="btn-mutuas-laborales">
                 <i class="fas fa-briefcase-medical"></i>
                 <span>Mutuas Laborales</span>
             </button>
