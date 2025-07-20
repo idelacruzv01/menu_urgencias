@@ -1,4 +1,6 @@
+/*Evento para el botón de seguros de salud*/
 document.getElementById('btn-seguros-salud').addEventListener('click', function () {
+    limpiarBloquesAseguradoras();
     fetch('ajax/seguros_salud.php')
         .then(response => response.text())
         .then(data => {
@@ -7,6 +9,24 @@ document.getElementById('btn-seguros-salud').addEventListener('click', function 
         })
         .catch(error => console.error('Error en la petición:', error));
 });
+
+/*Evento para el botón de seguros de deportes y accidentes*/
+document.getElementById('btn-seguros-deportes').addEventListener('click', function () {
+    limpiarBloquesAseguradoras();
+    fetch('ajax/seguros_deportes.php')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('resultado').innerHTML = data;
+            activarClicksEnAseguradoras();
+        })
+        .catch(error => console.error('Error en la petición:', error));
+});
+
+/*Función para limpiar los bloques de grid con el resultado de las aseguradoras de cada tipo*/
+function limpiarBloquesAseguradoras() {
+    document.getElementById('resultado').innerHTML = '';
+}
+
 
 function activarClicksEnAseguradoras() {
     const aseguradoras = document.querySelectorAll('.aseguradora');

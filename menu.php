@@ -22,7 +22,7 @@
                 <i class="fas fa-user-md"></i>
                 <span>Seguros Salud</span>
             </button>
-            <button class="btn-menu" data-tipo="accidentes">
+            <button class="btn-menu" data-tipo="accidentes" id="btn-seguros-deportes">
                 <i class="fas fa-running"></i>
                 <span>Seguros Deportivos y Accidentes</span>
             </button>

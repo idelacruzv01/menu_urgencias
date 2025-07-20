@@ -5,7 +5,7 @@ try {
     $db = new Database();
     $conn = $db->getConnection();
 
-    $stmt = $conn->query("SELECT id, nombre, logo FROM seguros_salud WHERE tipo_aseguradora_id=1 ORDER BY nombre ASC");
+    $stmt = $conn->query("SELECT id, nombre, logo FROM seguros_salud WHERE tipo_aseguradora_id=2 ORDER BY nombre ASC");
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     if ($resultados) {
